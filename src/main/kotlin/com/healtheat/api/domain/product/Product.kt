@@ -10,11 +10,11 @@ class Product (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val productName: String, // 상풍명
 
     @Enumerated(EnumType.STRING)
     val deleteState: DeleteState? = DeleteState.N, // 사용여부
 
+    val productName: String, // 상풍명
     val intakeWay: String, // 섭취 방법
     val shelfLifeMonth: Int, // 유통기한(월)
     val manufacturingNumber: String, //제조번호
@@ -27,15 +27,15 @@ class Product (
     val properties: String, //성상
     val shape: String, //형태
 
-    @JoinColumn(name = "productBrand_id")
-    @ManyToOne(targetEntity = ProductBrand::class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @OneToOne(targetEntity = ProductBrand::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var productBrand: ProductBrand,
 
-    @JoinColumn(name = "productFunctionality_id")
-    @ManyToOne(targetEntity = ProductFunctionality::class, fetch = FetchType.LAZY)
-    var productFunctionality: ProductFunctionality
+    @JoinColumn(name = "id")
+    @OneToMany(targetEntity = ProductFunctionality::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var productFunctionality: List<ProductFunctionality>? = null,
 
-    // TODO : FK  설정필요
-//    var nutrientId: Long // FK
-//    var functionalityId: Long // FK
+    @JoinColumn(name = "id")
+    @OneToMany(targetEntity = ProductNutrient::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var nutrient: List<ProductNutrient>? = null
 ) : BaseTimeEntity()
