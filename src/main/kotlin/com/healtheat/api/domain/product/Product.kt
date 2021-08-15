@@ -29,7 +29,12 @@ class Product (
 
     @JoinColumn(name = "productBrand_id")
     @ManyToOne(targetEntity = ProductBrand::class, fetch = FetchType.LAZY)
-    var productBrand: ProductBrand
+    var productBrand: ProductBrand,
+
+    @JoinColumn(name = "productFunctionality_id")
+    @ManyToOne(targetEntity = ProductFunctionality::class, fetch = FetchType.LAZY)
+    var productFunctionality: ProductFunctionality
+
     // TODO : FK  설정필요
 //    var nutrientId: Long // FK
 //    var functionalityId: Long // FK
