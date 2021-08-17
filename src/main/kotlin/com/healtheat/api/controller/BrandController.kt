@@ -1,23 +1,23 @@
 package com.healtheat.api.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RestController
+import com.healtheat.api.RestApiBaseFormat
+import com.healtheat.api.controller.dto.request.CreateBrandRequest
+import com.healtheat.api.controller.dto.response.BrandResponse
+import com.healtheat.api.service.BrandService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 
 @RestController
-class BrandController {
+class BrandController(@Autowired val brandService: BrandService) {
 
-    // TODO : brand list
     @GetMapping("/brands")
-    fun findAll(): String {
-        return "OK"
+    fun findAll(): RestApiBaseFormat {
+        return RestApiBaseFormat(data = brandService.findAll())
     }
 
-    // TODO : brand save
     @PostMapping("/brand")
-    fun save(): String {
-        return "OK"
+    fun save(@RequestBody createBrandRequest: CreateBrandRequest): RestApiBaseFormat {
+        return RestApiBaseFormat(data = brandService.save(createBrandRequest))
     }
 
     // TODO : brand edit

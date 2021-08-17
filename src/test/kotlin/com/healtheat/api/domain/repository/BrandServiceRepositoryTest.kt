@@ -1,8 +1,8 @@
 package com.healtheat.api.domain.repository
 
 import com.healtheat.api.config.DataSourceConfig
-import com.healtheat.api.domain.product.ProductBrand
-import com.healtheat.api.domain.product.repository.ProductBrandRepository
+import com.healtheat.api.domain.product.Brand
+import com.healtheat.api.domain.product.repository.BrandRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -20,18 +20,18 @@ import org.springframework.data.repository.findByIdOrNull
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles(value = ["local"])
 @Import(DataSourceConfig::class)
-class ProductBrandRepositoryTest(@Autowired val productBrandRepository: ProductBrandRepository) {
+class BrandServiceRepositoryTest(@Autowired val brandRepository: BrandRepository) {
 
     @Test
     fun save() {
         //given
-        val productBrand = ProductBrand(brandName = "종근당")
+        val brand = Brand(name = "종근당")
 
         //when
-        productBrandRepository.save(productBrand)
+        brandRepository.save(brand)
 
         //then
-        val savedProductBrands: ProductBrand? = productBrandRepository.findByIdOrNull(productBrand.id)
-        assertThat(savedProductBrands?.brandName).isEqualTo(productBrand.brandName)
+        val savedBrands: Brand? = brandRepository.findByIdOrNull(brand.id)
+        assertThat(savedBrands?.name).isEqualTo(brand.name)
     }
 }

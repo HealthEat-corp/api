@@ -28,8 +28,8 @@ class Product (
     val shape: String, //형태
 
     @JoinColumn(name = "id")
-    @OneToOne(targetEntity = ProductBrand::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    var productBrand: ProductBrand,
+    @OneToOne(targetEntity = Brand::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var brand: Brand,
 
     @JoinColumn(name = "id")
     @OneToMany(targetEntity = ProductFunctionality::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
