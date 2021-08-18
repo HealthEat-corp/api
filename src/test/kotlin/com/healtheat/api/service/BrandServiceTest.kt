@@ -14,7 +14,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 
-
 @ActiveProfiles(value = ["local"])
 @ExtendWith(SpringExtension::class)
 @SpringBootTest

@@ -5,7 +5,9 @@ import com.healtheat.api.controller.dto.request.EditBrandRequest
 import com.healtheat.api.controller.dto.response.BrandResponse
 import com.healtheat.api.domain.product.Brand
 import com.healtheat.api.domain.product.repository.BrandRepository
+import com.healtheat.api.exception.BusinessErrorException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -34,7 +36,8 @@ class BrandService(@Autowired val brandRepository: BrandRepository) {
 
     @Transactional
     fun edit(editBrandRequest: EditBrandRequest): BrandResponse {
-        val brand: Brand = brandRepository.findById(editBrandRequest.brandId).orElseThrow()
+        val brand: Brand = brandRepository.findByIdOrNull(editBrandRequest.brandId) ?: throw BusinessErrorException("잘못된 요청입니다.")
+
         brand.changeName(editBrandRequest.name)
 
         return BrandResponse(brand)
