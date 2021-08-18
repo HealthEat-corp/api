@@ -5,7 +5,7 @@ import com.healtheat.api.domain.product.enum.DeleteState
 import java.time.LocalDateTime
 
 class BrandResponse (brand: Brand) {
-    var brandId: Long = brand.id
+    var brandId: Long? = brand.brandId
 
     var name: String = brand.name
 

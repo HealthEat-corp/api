@@ -1,6 +1,7 @@
 package com.healtheat.api.service
 
 import com.healtheat.api.controller.dto.request.CreateBrandRequest
+import com.healtheat.api.controller.dto.request.EditBrandRequest
 import com.healtheat.api.controller.dto.response.BrandResponse
 import com.healtheat.api.domain.product.Brand
 import com.healtheat.api.domain.product.repository.BrandRepository
@@ -30,4 +31,13 @@ class BrandService(@Autowired val brandRepository: BrandRepository) {
 
         return brandsResponse
     }
+
+    @Transactional
+    fun edit(editBrandRequest: EditBrandRequest): BrandResponse {
+        val brand: Brand = brandRepository.findById(editBrandRequest.brandId).orElseThrow()
+        brand.changeName(editBrandRequest.name)
+
+        return BrandResponse(brand)
+    }
+
 }

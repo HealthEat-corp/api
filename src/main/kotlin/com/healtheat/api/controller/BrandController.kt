@@ -2,7 +2,7 @@ package com.healtheat.api.controller
 
 import com.healtheat.api.RestApiBaseFormat
 import com.healtheat.api.controller.dto.request.CreateBrandRequest
-import com.healtheat.api.controller.dto.response.BrandResponse
+import com.healtheat.api.controller.dto.request.EditBrandRequest
 import com.healtheat.api.service.BrandService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -20,9 +20,10 @@ class BrandController(@Autowired val brandService: BrandService) {
         return RestApiBaseFormat(data = brandService.save(createBrandRequest))
     }
 
-    // TODO : brand edit
     @PatchMapping("/brand/{id}")
-    fun edit(): String {
-        return "OK"
+    fun edit(@PathVariable(value = "id") brandId: Long,
+             @RequestBody editBrandRequest: EditBrandRequest): RestApiBaseFormat {
+        editBrandRequest.changeId(brandId)
+        return RestApiBaseFormat(data = brandService.edit(editBrandRequest))
     }
 }

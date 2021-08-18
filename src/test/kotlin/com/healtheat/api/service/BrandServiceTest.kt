@@ -1,7 +1,9 @@
 package com.healtheat.api.service
 
 import com.healtheat.api.controller.dto.request.CreateBrandRequest
+import com.healtheat.api.controller.dto.request.EditBrandRequest
 import com.healtheat.api.controller.dto.response.BrandResponse
+import com.healtheat.api.domain.product.Brand
 import com.healtheat.api.domain.product.repository.BrandRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -27,9 +29,23 @@ class BrandServiceTest(
         val createBrandRequest = CreateBrandRequest(name = "제약")
 
         //when
-        val brandResponse: BrandResponse = brandService.save(createBrandRequest)
+        val brandResponse:BrandResponse = brandService.save(createBrandRequest)
 
         //then
         assertThat(brandResponse.brandId).isEqualTo(1)
+    }
+
+    @Test
+    fun edit() {
+        //given
+        val brand = Brand(name = "제약")
+        brandRepository.save(brand)
+        val editBrandRequest = EditBrandRequest(1, "제약제약")
+
+        //when
+        val brandResponse:BrandResponse = brandService.edit(editBrandRequest)
+
+        //then
+        assertThat(brandResponse.name).isEqualTo(editBrandRequest.name)
     }
 }

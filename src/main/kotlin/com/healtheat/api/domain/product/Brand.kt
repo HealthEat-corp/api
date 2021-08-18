@@ -8,10 +8,14 @@ import javax.persistence.*
 class Brand (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val brandId: Long? = null,
 
-    val name: String,
+    var name: String,
 
     @Enumerated(EnumType.STRING)
     val deleteState: DeleteState = DeleteState.N
-) : BaseTimeEntity()
+) : BaseTimeEntity() {
+    fun changeName(name: String) {
+        this.name = name
+    }
+}

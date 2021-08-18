@@ -31,7 +31,7 @@ class BrandServiceRepositoryTest(@Autowired val brandRepository: BrandRepository
         brandRepository.save(brand)
 
         //then
-        val savedBrands: Brand? = brandRepository.findByIdOrNull(brand.id)
+        val savedBrands: Brand? = brandRepository.findByIdOrNull(brand.brandId)
         assertThat(savedBrands?.name).isEqualTo(brand.name)
     }
 }
