@@ -6,12 +6,13 @@ import javax.validation.constraints.NotBlank
 
 // TODO : validation message 설정 필요
 class FormFunctionalRequest(
-    val id: Long? = null,
+    var functionalId: Long? = null,
 
     @field:NotBlank
     val name: String,
 
-    val deleteStatus: DeleteState? = null,
+    @field:NotBlank
+    val deleteStatus: DeleteState,
 
     @field:NotBlank
     val unit: String, // 단위
@@ -24,4 +25,9 @@ class FormFunctionalRequest(
 
     @field:NotBlank
     val mainFunctionality: String, // 주된 기능성
-)
+) {
+
+    fun changeFunctionalId(functionalId: Long) {
+        this.functionalId = functionalId
+    }
+}

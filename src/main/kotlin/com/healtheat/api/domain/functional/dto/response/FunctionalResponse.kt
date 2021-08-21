@@ -4,7 +4,7 @@ import com.healtheat.api.domain.DeleteState
 import com.healtheat.api.domain.functional.Functional
 
 class FunctionalResponse (functional: Functional) {
-    val id: Long? = functional.id
+    val functionalId: Long? = functional.functionalId
     val deleteState: DeleteState = functional.deleteState
     val name: String = functional.name// 기능성 이름
     val unit: String = functional.unit// 단위
