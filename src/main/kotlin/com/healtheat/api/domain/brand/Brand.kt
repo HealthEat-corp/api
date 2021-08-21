@@ -1,7 +1,7 @@
-package com.healtheat.api.domain.product
+package com.healtheat.api.domain.brand
 
 import com.healtheat.api.domain.BaseTimeEntity
-import com.healtheat.api.domain.product.enum.DeleteState
+import com.healtheat.api.domain.DeleteState
 import javax.persistence.*
 
 @Entity

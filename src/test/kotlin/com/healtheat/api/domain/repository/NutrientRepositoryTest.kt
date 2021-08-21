@@ -1,9 +1,9 @@
 package com.healtheat.api.domain.repository
 
 import com.healtheat.api.config.DataSourceConfig
-import com.healtheat.api.domain.product.Nutrient
-import com.healtheat.api.domain.product.enum.DeleteState
-import com.healtheat.api.domain.product.repository.NutrientRepository
+import com.healtheat.api.domain.nutrient.Nutrient
+import com.healtheat.api.domain.DeleteState
+import com.healtheat.api.domain.nutrient.NutrientRepository
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

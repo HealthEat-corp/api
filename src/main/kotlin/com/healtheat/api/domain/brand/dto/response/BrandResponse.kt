@@ -1,7 +1,7 @@
-package com.healtheat.api.controller.dto.response
+package com.healtheat.api.domain.brand.dto.response
 
-import com.healtheat.api.domain.product.Brand
-import com.healtheat.api.domain.product.enum.DeleteState
+import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.DeleteState
 import java.time.LocalDateTime
 
 class BrandResponse (brand: Brand) {

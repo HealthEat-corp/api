@@ -1,7 +1,8 @@
 package com.healtheat.api.domain.product
 
 import com.healtheat.api.domain.BaseTimeEntity
-import com.healtheat.api.domain.product.enum.DeleteState
+import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.DeleteState
 import javax.persistence.*
 
 @Table(name = "product")

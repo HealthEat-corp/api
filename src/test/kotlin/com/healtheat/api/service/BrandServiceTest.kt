@@ -1,10 +1,10 @@
 package com.healtheat.api.service
 
-import com.healtheat.api.controller.dto.request.CreateBrandRequest
-import com.healtheat.api.controller.dto.request.EditBrandRequest
-import com.healtheat.api.controller.dto.response.BrandResponse
-import com.healtheat.api.domain.product.Brand
-import com.healtheat.api.domain.product.repository.BrandRepository
+import com.healtheat.api.domain.brand.dto.request.CreateBrandRequest
+import com.healtheat.api.domain.brand.dto.request.EditBrandRequest
+import com.healtheat.api.domain.brand.dto.response.BrandResponse
+import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.brand.BrandRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -20,7 +20,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class BrandServiceTest(
     @Autowired val brandService: BrandService,
-    @Autowired val brandRepository: BrandRepository) {
+    @Autowired val brandRepository: BrandRepository
+) {
 
     @Test
     fun save() {

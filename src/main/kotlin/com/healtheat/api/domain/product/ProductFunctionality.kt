@@ -1,6 +1,7 @@
 package com.healtheat.api.domain.product
 
 import com.healtheat.api.domain.BaseTimeEntity
+import com.healtheat.api.domain.functional.Functional
 import javax.persistence.*
 
 @Entity
@@ -14,7 +15,7 @@ class ProductFunctionality (
     val product: Product,
 
     @JoinColumn(name = "functionality_id")
-    @ManyToOne(targetEntity = Functionality::class, fetch = FetchType.LAZY)
-    val functionality: Functionality
+    @ManyToOne(targetEntity = Functional::class, fetch = FetchType.LAZY)
+    val functional: Functional
 
 ) : BaseTimeEntity()

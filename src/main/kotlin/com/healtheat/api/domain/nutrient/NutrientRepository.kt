@@ -1,6 +1,5 @@
-package com.healtheat.api.domain.product.repository
+package com.healtheat.api.domain.nutrient
 
-import com.healtheat.api.domain.product.Nutrient
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

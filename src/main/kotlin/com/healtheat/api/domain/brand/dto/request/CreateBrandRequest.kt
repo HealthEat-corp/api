@@ -1,4 +1,4 @@
-package com.healtheat.api.controller.dto.request
+package com.healtheat.api.domain.brand.dto.request
 
 data class CreateBrandRequest(
     var name: String

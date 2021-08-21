@@ -1,6 +1,7 @@
 package com.healtheat.api.domain.product
 
 import com.healtheat.api.domain.BaseTimeEntity
+import com.healtheat.api.domain.nutrient.Nutrient
 import javax.persistence.*
 
 @Entity

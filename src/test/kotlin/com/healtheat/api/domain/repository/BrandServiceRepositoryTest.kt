@@ -1,8 +1,8 @@
 package com.healtheat.api.domain.repository
 
 import com.healtheat.api.config.DataSourceConfig
-import com.healtheat.api.domain.product.Brand
-import com.healtheat.api.domain.product.repository.BrandRepository
+import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.brand.BrandRepository
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase

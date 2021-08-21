@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
 
 @WebMvcTest(BrandController::class)
-class BrandControllerTest(
+class BrandServiceControllerTest(
     @Autowired val brandController: BrandController,
     @Autowired val mockMvc: MockMvc) {
 

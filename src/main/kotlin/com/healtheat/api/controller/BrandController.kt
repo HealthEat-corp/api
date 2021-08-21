@@ -1,8 +1,8 @@
 package com.healtheat.api.controller
 
 import com.healtheat.api.RestApiBaseFormat
-import com.healtheat.api.controller.dto.request.CreateBrandRequest
-import com.healtheat.api.controller.dto.request.EditBrandRequest
+import com.healtheat.api.domain.brand.dto.request.CreateBrandRequest
+import com.healtheat.api.domain.brand.dto.request.EditBrandRequest
 import com.healtheat.api.service.BrandService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
