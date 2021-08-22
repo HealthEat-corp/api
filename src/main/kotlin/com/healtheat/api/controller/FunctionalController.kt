@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class FunctionalController(@Autowired private val functionalService: FunctionalService) {
 
+    @GetMapping("/functional")
+    fun findAll(): RestApiBaseFormat {
+        return RestApiBaseFormat(data = functionalService.findAll())
+    }
+
     @PostMapping("/functional")
     fun save(@RequestBody formFunctionalRequest: FormFunctionalRequest): RestApiBaseFormat {
         return RestApiBaseFormat(data = functionalService.save(formFunctionalRequest))

@@ -15,6 +15,16 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class FunctionalService(@Autowired private val functionalRepository: FunctionalRepository) {
 
+    fun findAll(): MutableList<FunctionalResponse> {
+        val functionalList: MutableList<Functional> = functionalRepository.findAll()
+
+        val functionalResponseList: MutableList<FunctionalResponse> = mutableListOf()
+
+        functionalList.forEach{functionalResponseList.add(FunctionalResponse(it))}
+
+        return functionalResponseList
+    }
+
     @Transactional
     fun save(formFunctionalRequest: FormFunctionalRequest): FunctionalResponse {
         val functional = Functional(
