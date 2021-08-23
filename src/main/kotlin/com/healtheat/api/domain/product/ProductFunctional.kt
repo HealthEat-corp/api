@@ -4,18 +4,19 @@ import com.healtheat.api.domain.BaseTimeEntity
 import com.healtheat.api.domain.functional.Functional
 import javax.persistence.*
 
+@Table(name = "product_functional")
 @Entity
-class ProductFunctionality (
+class ProductFunctional (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val productFunctionalId: Long? = null,
 
     @JoinColumn(name = "product_id")
-    @ManyToOne(targetEntity = Product::class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     val product: Product,
 
     @JoinColumn(name = "functionality_id")
-    @ManyToOne(targetEntity = Functional::class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     val functional: Functional
 
 ) : BaseTimeEntity()

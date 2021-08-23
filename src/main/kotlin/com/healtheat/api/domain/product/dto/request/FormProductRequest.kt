@@ -23,11 +23,10 @@ data class FormProductRequest(
     val properties: String, //성상
     val shape: String, //형태
     val brandId: Long,
-    val nutrientId: MutableList<Long>
+    val nutrientId: MutableList<Long>,
+    val functionalId: MutableList<Long>
 ) {
     fun toEntity(brand: Brand): Product {
-//        val productNutrient: MutableList<ProductNutrient> = mutableListOf(aProductNutrient)
-
         return Product(
             deleteState = this.deleteState,
             name = this.name,
@@ -43,7 +42,6 @@ data class FormProductRequest(
             properties = this.properties,
             shape = this.shape,
             brand = brand
-//            productNutrient = productNutrient
         )
     }
 }

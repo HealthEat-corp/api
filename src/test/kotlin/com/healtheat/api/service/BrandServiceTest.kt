@@ -32,7 +32,7 @@ class BrandServiceTest(
         val brandResponse:BrandResponse = brandService.save(createBrandRequest)
 
         //then
-        assertThat(brandResponse.brandId).isEqualTo(1)
+        assertThat(brandResponse.name).isEqualTo(createBrandRequest.name)
     }
 
     @Test
@@ -40,7 +40,7 @@ class BrandServiceTest(
         //given
         val brand = Brand(name = "제약")
         brandRepository.save(brand)
-        val editBrandRequest = EditBrandRequest(1, "제약제약")
+        val editBrandRequest = EditBrandRequest(brandId = brand.brandId!!, "제약제약")
 
         //when
         val brandResponse:BrandResponse = brandService.edit(editBrandRequest)

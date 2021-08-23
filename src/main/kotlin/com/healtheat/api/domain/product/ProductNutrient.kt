@@ -8,7 +8,7 @@ import javax.persistence.*
 class ProductNutrient (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val productNutrientId: Long? = null,
 
     @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -17,8 +17,4 @@ class ProductNutrient (
     @JoinColumn(name = "nutrient_id")
     @ManyToOne(fetch = FetchType.LAZY)
     val nutrient: Nutrient
-) : BaseTimeEntity() {
-    fun changeProduct(product: Product) {
-        this.product = product
-    }
-}
+) : BaseTimeEntity()

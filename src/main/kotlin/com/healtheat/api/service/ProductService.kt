@@ -2,8 +2,11 @@ package com.healtheat.api.service
 
 import com.healtheat.api.domain.brand.Brand
 import com.healtheat.api.domain.brand.BrandRepository
+import com.healtheat.api.domain.functional.Functional
+import com.healtheat.api.domain.functional.FunctionalRepository
 import com.healtheat.api.domain.nutrient.Nutrient
 import com.healtheat.api.domain.nutrient.NutrientRepository
+import com.healtheat.api.domain.product.ProductFunctional
 import com.healtheat.api.domain.product.ProductNutrient
 import com.healtheat.api.domain.product.dto.request.FormProductRequest
 import com.healtheat.api.domain.product.dto.response.ProductResponse
@@ -19,7 +22,8 @@ import org.springframework.transaction.annotation.Transactional
 class ProductService(
     @Autowired private val productRepository: ProductRepository,
     @Autowired private val brandRepository: BrandRepository,
-    @Autowired private val nutrientRepository: NutrientRepository) {
+    @Autowired private val nutrientRepository: NutrientRepository,
+    @Autowired private val functionalRepository: FunctionalRepository) {
 
     @Transactional
     fun save(formProductRequest: FormProductRequest): ProductResponse {
@@ -27,10 +31,15 @@ class ProductService(
 
         val product = formProductRequest.toEntity(brand)
 
-
+        // nutrient 셋팅
         val nutrients: MutableList<Nutrient> = nutrientRepository.findByNutrientIdIn(formProductRequest.nutrientId)
         nutrients.forEach { nutrient ->
             product.addProductNutrient(ProductNutrient(product = product, nutrient = nutrient))
+        }
+        // functional 셋팅
+        val functionals: MutableList<Functional> = functionalRepository.findByFunctionalIdIn(formProductRequest.functionalId)
+        functionals.forEach { functional ->
+            product.addProductFunctional(ProductFunctional(product = product, functional = functional))
         }
 
         productRepository.save(product)
