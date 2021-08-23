@@ -11,10 +11,14 @@ class ProductNutrient (
     val id: Long? = null,
 
     @JoinColumn(name = "product_id")
-    @ManyToOne(targetEntity = Product::class, fetch = FetchType.LAZY)
-    val product: Product,
+    @ManyToOne(fetch = FetchType.LAZY)
+    var product: Product,
 
     @JoinColumn(name = "nutrient_id")
-    @ManyToOne(targetEntity = Nutrient::class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     val nutrient: Nutrient
-) : BaseTimeEntity()
+) : BaseTimeEntity() {
+    fun changeProduct(product: Product) {
+        this.product = product
+    }
+}

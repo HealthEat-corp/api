@@ -21,6 +21,11 @@ class ProductResponse (product: Product) {
     val properties: String = product.properties//성상
     val shape: String = product.shape//형태
     var brand: Brand = product.brand!!
+    var nutrientName: MutableList<String> = mutableListOf()
     val modifiedAt: LocalDateTime = product.modifiedAt
     val createAt: LocalDateTime = product.createdAt
+
+    init {
+        product.productNutrient.forEach { this.nutrientName.add(it.nutrient.name) }
+    }
 }

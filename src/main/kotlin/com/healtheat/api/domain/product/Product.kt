@@ -32,12 +32,16 @@ class Product (
     @OneToOne(fetch = FetchType.LAZY)
     var brand: Brand? = null,
 
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL])
+    var productNutrient: MutableList<ProductNutrient> = mutableListOf()
+
     // TODO : 관계 설정 필요
 //    @JoinColumn(name = "id")
 //    @OneToMany(targetEntity = ProductFunctionality::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
 //    var productFunctionality: List<ProductFunctionality>? = null,
-//
-//    @JoinColumn(name = "id")
-//    @OneToMany(targetEntity = ProductNutrient::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-//    var nutrient: List<ProductNutrient>? = null
-) : BaseTimeEntity()
+
+) : BaseTimeEntity() {
+    fun addProductNutrient(productNutrient: ProductNutrient) {
+        this.productNutrient.add(productNutrient)
+    }
+}
