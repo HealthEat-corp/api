@@ -27,21 +27,30 @@ class ProductService(
 
     @Transactional
     fun save(formProductRequest: FormProductRequest): ProductResponse {
-        val brand: Brand = brandRepository.findByIdOrNull(formProductRequest.brandId) ?: throw BusinessErrorException("잘못된 요청입니다.")
+        // get brand
+        val brand: Brand = brandRepository.findByIdOrNull(formProductRequest.brandId) ?: throw BusinessErrorException("not found brandId")
 
-        val product = formProductRequest.toEntity(brand)
-
-        // nutrient 셋팅
+        // get nutrient
         val nutrients: MutableList<Nutrient> = nutrientRepository.findByNutrientIdIn(formProductRequest.nutrientId)
-        nutrients.forEach { nutrient ->
-            product.addProductNutrient(ProductNutrient(product = product, nutrient = nutrient))
-        }
-        // functional 셋팅
-        val functionals: MutableList<Functional> = functionalRepository.findByFunctionalIdIn(formProductRequest.functionalId)
-        functionals.forEach { functional ->
-            product.addProductFunctional(ProductFunctional(product = product, functional = functional))
-        }
 
+        // get functional
+        val functionals: MutableList<Functional> = functionalRepository.findByFunctionalIdIn(formProductRequest.functionalId)
+
+        // set product
+        val product = formProductRequest.toEntity(brand = brand, nutrients = nutrients, functionals = functionals)
+        productRepository.save(product)
+
+        return ProductResponse(product)
+    }
+
+    @Transactional
+    fun edit(formProductRequest: FormProductRequest): ProductResponse {
+        val product = productRepository.findByIdOrNull(formProductRequest.productId) ?: throw BusinessErrorException("not found productId")
+        val brand: Brand = brandRepository.findByIdOrNull(formProductRequest.brandId) ?: throw BusinessErrorException("not found brandId")
+        val nutrients: MutableList<Nutrient> = nutrientRepository.findByNutrientIdIn(formProductRequest.nutrientId)
+        val functionals: MutableList<Functional> = functionalRepository.findByFunctionalIdIn(formProductRequest.functionalId)
+
+        product.edit(formProductRequest = formProductRequest, brand = brand, nutrients = nutrients, functionals = functionals)
         productRepository.save(product)
         return ProductResponse(product)
     }

@@ -13,7 +13,7 @@ class ProductFunctional (
 
     @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    val product: Product,
+    var product: Product?,
 
     @JoinColumn(name = "functionality_id")
     @ManyToOne(fetch = FetchType.LAZY)

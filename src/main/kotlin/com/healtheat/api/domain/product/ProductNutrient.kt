@@ -12,7 +12,7 @@ class ProductNutrient (
 
     @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    var product: Product,
+    var product: Product?,
 
     @JoinColumn(name = "nutrient_id")
     @ManyToOne(fetch = FetchType.LAZY)

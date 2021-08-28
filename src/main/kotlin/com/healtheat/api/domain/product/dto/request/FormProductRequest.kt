@@ -2,13 +2,13 @@ package com.healtheat.api.domain.product.dto.request
 
 import com.healtheat.api.domain.DeleteState
 import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.functional.Functional
 import com.healtheat.api.domain.nutrient.Nutrient
 import com.healtheat.api.domain.product.Product
-import com.healtheat.api.domain.product.ProductNutrient
 
 // TODO : validation message 설정 필요
 data class FormProductRequest(
-    val productId: Long? = null,
+    var productId: Long? = null,
     val deleteState: DeleteState, // 사용여부
     val name: String, // 상풍명
     val intakeWay: String, // 섭취 방법
@@ -26,8 +26,11 @@ data class FormProductRequest(
     val nutrientId: MutableList<Long>,
     val functionalId: MutableList<Long>
 ) {
-    fun toEntity(brand: Brand): Product {
-        return Product(
+    fun changeProductId(productId: Long) {
+        this.productId = productId
+    }
+    fun toEntity(brand: Brand, nutrients: MutableList<Nutrient>, functionals: MutableList<Functional>): Product {
+        val product = Product(
             deleteState = this.deleteState,
             name = this.name,
             intakeWay = this.intakeWay,
@@ -43,5 +46,9 @@ data class FormProductRequest(
             shape = this.shape,
             brand = brand
         )
+        product.addProductNutrient(nutrients = nutrients)
+        product.addProductFunctional(functionals = functionals)
+
+        return product
     }
 }

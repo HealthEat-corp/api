@@ -20,7 +20,7 @@ class NutrientController(@Autowired private val nutrientService: NutrientService
     }
 
     @PatchMapping("/nutrient/{id}")
-    fun save(@PathVariable("id") nutrientId: Long, @RequestBody formNutrientRequest: FormNutrientRequest): RestApiBaseFormat {
+    fun edit(@PathVariable("id") nutrientId: Long, @RequestBody formNutrientRequest: FormNutrientRequest): RestApiBaseFormat {
         formNutrientRequest.changeNutrientId(nutrientId)
         return RestApiBaseFormat(data = nutrientService.edit(formNutrientRequest))
     }

@@ -20,7 +20,7 @@ class FunctionalController(@Autowired private val functionalService: FunctionalS
     }
 
     @PatchMapping("/functional/{id}")
-    fun save(@PathVariable("id") functionalId: Long, @RequestBody formFunctionalRequest: FormFunctionalRequest): RestApiBaseFormat {
+    fun edit(@PathVariable("id") functionalId: Long, @RequestBody formFunctionalRequest: FormFunctionalRequest): RestApiBaseFormat {
         formFunctionalRequest.changeFunctionalId(functionalId)
         return RestApiBaseFormat(data = functionalService.edit(formFunctionalRequest))
     }

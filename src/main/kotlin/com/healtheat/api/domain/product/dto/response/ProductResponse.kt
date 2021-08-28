@@ -1,7 +1,9 @@
 package com.healtheat.api.domain.product.dto.response
 
 import com.healtheat.api.domain.DeleteState
-import com.healtheat.api.domain.brand.Brand
+import com.healtheat.api.domain.brand.dto.response.BrandResponse
+import com.healtheat.api.domain.functional.dto.response.FunctionalResponse
+import com.healtheat.api.domain.nutrient.dto.response.NutrientResponse
 import com.healtheat.api.domain.product.Product
 import java.time.LocalDateTime
 
@@ -20,14 +22,14 @@ class ProductResponse (product: Product) {
     val standardSpecification: String = product.standardSpecification// 기준규격
     val properties: String = product.properties//성상
     val shape: String = product.shape//형태
-    var brand: Brand = product.brand!!
-    var nutrientName: MutableList<String> = mutableListOf()
-    var functionalName: MutableList<String> = mutableListOf()
+    var brand: BrandResponse = BrandResponse(product.brand!!)
+    var nutrient: MutableList<NutrientResponse> = mutableListOf()
+    var functional: MutableList<FunctionalResponse> = mutableListOf()
     val modifiedAt: LocalDateTime = product.modifiedAt
     val createAt: LocalDateTime = product.createdAt
 
     init {
-        product.productNutrient.forEach { this.nutrientName.add(it.nutrient.name) }
-        product.productFunctional.forEach { this.functionalName.add(it.functional.name) }
+        product.productNutrient.forEach { this.nutrient.add(NutrientResponse(it.nutrient)) }
+        product.productFunctional.forEach { this.functional.add(FunctionalResponse(it.functional)) }
     }
 }
