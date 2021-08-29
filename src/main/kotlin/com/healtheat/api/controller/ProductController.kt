@@ -2,6 +2,7 @@ package com.healtheat.api.controller
 
 import com.healtheat.api.RestApiBaseFormat
 import com.healtheat.api.domain.product.dto.request.FormProductRequest
+import com.healtheat.api.domain.product.dto.request.ListProductRequest
 import com.healtheat.api.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -18,5 +19,10 @@ class ProductController(@Autowired private val productService: ProductService) {
     fun edit(@PathVariable("id") productId: Long, @RequestBody formProductRequest: FormProductRequest): RestApiBaseFormat {
         formProductRequest.changeProductId(productId)
         return RestApiBaseFormat(data = productService.edit(formProductRequest))
+    }
+
+    @GetMapping("/products")
+    fun findAll(listProductRequest: ListProductRequest): RestApiBaseFormat {
+        return productService.findAll(listProductRequest)
     }
 }

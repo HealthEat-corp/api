@@ -1,5 +1,6 @@
 package com.healtheat.api.service
 
+import com.healtheat.api.RestApiBaseFormat
 import com.healtheat.api.domain.DeleteState
 import com.healtheat.api.domain.brand.Brand
 import com.healtheat.api.domain.brand.BrandRepository
@@ -7,7 +8,9 @@ import com.healtheat.api.domain.functional.Functional
 import com.healtheat.api.domain.functional.FunctionalRepository
 import com.healtheat.api.domain.nutrient.Nutrient
 import com.healtheat.api.domain.nutrient.NutrientRepository
+import com.healtheat.api.domain.product.Product
 import com.healtheat.api.domain.product.dto.request.FormProductRequest
+import com.healtheat.api.domain.product.dto.request.ListProductRequest
 import com.healtheat.api.domain.product.dto.response.ProductResponse
 import com.healtheat.api.domain.product.repository.ProductRepository
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -170,5 +173,37 @@ internal class ProductServiceTest(
         //then
         assertEquals(1, productResponse.nutrient.size)
         assertEquals(1, productResponse.functional.size)
+    }
+
+    @Test
+    fun findAll() {
+        //given
+        brandRepository.save(brand)
+        for (i in 1..50) {
+            val saveFormProduct = Product(deleteState = DeleteState.N, // 사용여부
+                name = "name$i",
+                intakeWay = "intakeWay",
+                shelfLifeMonth = 1,
+                manufacturingNumber = "manufacturingNumber",
+                mainFunctionality = "mainFunctionality",
+                storageWay = "storageWay",
+                licenseNumber = "licenseNumber",
+                packingMaterial = "packingMaterial",
+                intakePrecaution = "intakePrecaution",
+                standardSpecification = "standardSpecification",
+                properties = "properties",
+                shape = "properties",
+                brand = brand
+            )
+            productRepository.save(saveFormProduct)
+        }
+        val listProductRequest = ListProductRequest(0, 10)
+
+        //when
+        val restApiBaseFormat: RestApiBaseFormat = productService.findAll(listProductRequest)
+
+        //then
+        assertEquals(0, restApiBaseFormat.pagenation?.nowPage)
+        assertEquals(5, restApiBaseFormat.pagenation?.totalPage)
     }
 }
